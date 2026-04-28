@@ -1,0 +1,15 @@
+-- Configuração do GIT
+git config --global user.name AnaBeatriz15010
+git config --global user.email anaevalegilmar@gmail.com
+
+-- Criar um projeto, especificando nome e template vazio
+npx create-expo-app@latest listashopping --template blank
+
+cd listashopping
+
+-- Bibliotecas
+npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar
+
+
+-- Executar o projeto
+npx expo start --tunnel
