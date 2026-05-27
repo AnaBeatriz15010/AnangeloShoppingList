@@ -35,6 +35,56 @@ export default function Home() {
     setTextInput('');
   }
 
+  function markProduto(itemId){
+        const newItems = items.map(item => {
+      if (item.id === itemId) {
+        return { ...item, bought: true };
+      }
+        return item;
+    });
+    setItems(newItems);
+  }
+
+  function unmarkProduto(itemId) {
+    const newItems = items.map(item => {
+      if (item.id === itemId) {
+        return { ...item, bought: false };
+      }
+        return item;
+    });
+    setItems(newItems);
+}
+
+  function removeProduto(itemId) {
+    Alert.alert('Excluir Produto?', 
+      'Confirma a exclusão deste produto',
+      [
+        {
+          text: 'Sim', onPress: () => {
+            const newItems = items.filter(item => item.id != itemId);
+            setItems(newItems);
+          }
+        },
+        {
+          text: 'Não', style: 'cacel'
+        }
+      ]
+    )
+  }
+  function removeAll(itemId) {
+    Alert.alert('Limpar Lista?', 
+      'Confirma a exclusão de todos os produtos?',
+      [
+        {
+          text: 'Sim', onPress: () => { setItems([]) }
+        },
+        {
+          text: 'Não', style: 'cacel'
+        }
+      ]
+    )
+  }
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
       <ImageBackground
@@ -44,7 +94,7 @@ export default function Home() {
       >
         <View style={styles.header}>
           <Text style={styles.title}>Lista de Compras</Text>
-          <Ionicons name='trash' size={32} color="#fff"></Ionicons>
+          <Ionicons name='trash' size={32} color="#fff" onPress={removeAll} /> 
         </View>
 
         {/* Lista de compras */}
@@ -54,7 +104,12 @@ export default function Home() {
           data={items}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => 
-            <ItemList item={item}/>
+            <ItemList 
+            item={item}
+            markItem={markProduto}
+            unmarkItem={unmarkProduto}
+            removeItem={removeProduto}
+            />
           }
         />
 

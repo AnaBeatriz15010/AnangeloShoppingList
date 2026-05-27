@@ -12,4 +12,4 @@ npx expo install expo-router react-native-safe-area-context react-native-screens
 
 
 -- Executar o projeto
-npx expo start --tunnel
+npx expo start --tunnel 
